@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        body{
+            background-color: black;
+            overflow: hidden;
+        }
+        .center{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .sun{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: gold;
+            box-shadow: 0px 0px 20px 1px goldenrod;
+        }
+        .earth{
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            animation: rot 10s linear infinite;
+        }
+        .earth::before{
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: 0;
+            top: 0;
+            transform: translate(-50%,-50%);
+            background-color: darkblue;
+            border-radius: 50%;
+            top: 50%;
+        }
+        .moon{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            animation: rot 3s infinite linear;
+        }
+        .moon::before{
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            left: 0;
+            top: 0;
+            transform: translate(-50%,-50%);
+            background-color: #fff;
+            border-radius: 50%;
+            top: 50%;
+        }
+        .mars{
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            animation: rot 4s linear infinite;
+        }
+        .mars::before{
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 0;
+            top: 0;
+            background-color: darkmagenta;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        .venus{
+            width: 550px;
+            height: 550px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            animation: rot 6s linear infinite;
+        }
+        .venus::before{
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            left: 0;
+            top: 0;
+            background-color: palegreen;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        @keyframes rot {
+            0%{
+                transform: translate(-50%,-50%) rotate(0deg);
+            }
+            100%{
+                transform: translate(-50%,-50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sun center"></div>
+<div class="earth center">
+    <div class="moon"></div>
+</div>
+<div class="mars center"></div>
+<div class="venus center"></div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        body{
+            background-color: sandybrown;
+        }
+        .moon{
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            position: absolute;
+            left: 150px;
+            top: 150px;
+            border-radius: 50%;
+        }
+        .moon::before,
+        .moon::after{
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+        }
+        .moon::before{
+            animation: bigger 1s infinite;
+
+        }
+        .moon::after{
+            animation: bigger 1s infinite 0.16s;
+        }
+        @keyframes bigger {
+            0% {
+                transform: scale(1);
+                background-color: rgba(255, 255, 255, 1);
+            }
+            100%{
+                transform: scale(2);
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+        .bottom{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 235px;
+        }
+        .bottom::before,
+        .bottom::after{
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: url("images/1.png") no-repeat left bottom;
+            opacity: 0.5;
+            animation: UpDown 1s alternate infinite;
+        }
+        .bottom::after{
+            background: url("images/2.png");
+            animation: UpDown 1s alternate infinite 0.5s;
+        }
+        @keyframes UpDown {
+            0%{
+
+            }
+            100%{
+                transform: translateY(25px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="moon"></div>
+<div class="bottom"></div>
+</body>
+</html>

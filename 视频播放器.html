@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <title></title>
+    <style>
+        figcaption{
+            text-align: center;
+            font-size: 24px;
+        }
+        .player{
+            width: 720px;
+            height: 360px;
+            margin: 50px auto;
+            background-color: #000000;
+            position: relative;
+            border-radius: 20px;
+        }
+        video{
+            display: block;
+            height: 100%;
+            margin: 0 auto;
+        }
+        .controls{
+            position: absolute;
+            width: 700px;
+            height: 40px;
+            left: 10px;
+            bottom: 10px;
+            background-color: rgba(34,55,34,0.9);
+            border-radius: 8px;
+        }
+        .play-btn{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            color: darkcyan;
+            left: 10px;
+            top: 10px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 20px;
+        }
+        .progress{
+            position: absolute;
+            width: 440px;
+            height: 10px;
+            left: 40px;
+            top: 15px;
+            background-color: rgba(90,78,123,0.4);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .curr-progress{
+            width: 50%;
+            height: 100%;
+            background-color: sienna;
+        }
+        .time{
+            position: absolute;
+            width: 120px;
+            height: 20px;
+            top: 10px;
+            left: 520px;
+            color: darkcyan;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+        }
+        .extend{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            color: silver;
+            top: 10px;
+            right: 15px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 20px;
+        }
+        .range{
+            position: absolute;
+            background-color: rgba(32, 65, 123, 0.6);
+            bottom: -10px;
+            right: 20px;
+            display: none;
+            cursor: pointer;
+
+        }
+        .range:hover{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<figure>
+    <figcaption>腾讯播放器</figcaption>
+    <div class="player">
+        <video src="fun.mp4"></video>
+        <!-- 控制条 -->
+        <div class="controls">
+            <!-- 播放按钮-->
+            <a class="play-btn icon-play" href="#"></a>
+            <!-- 进度条-->
+            <div class="progress">
+                <div class="curr-progress"></div>
+            </div>
+            <!-- 时间-->
+            <div class="time">
+                <span class="curr-time">00:00:00</span>/<span class="total-time">00:00:00</span>
+            </div>
+            <!-- 全屏按钮-->
+            <a class="extend icon-resize-full" href="#"></a>
+
+            <input type="range" class="range" min="0" max="100" />
+        </div>
+    </div>
+</figure>
+<script>
+    var video=document.querySelector("video");
+    var playBtn=document.querySelector(".play-btn");
+    playBtn.onclick=function(){
+        if(video.paused){
+            video.play();
+        }else{
+            video.pause();
+        }
+        playBtn.classList.toggle("icon-play");
+        playBtn.classList.toggle("icon-pluse");
+    };
+
+    var tTime=0;
+    var totalTime=document.querySelector(".total-time");
+    video.oncanplay=function(){
+        tTime=video.duration;
+        totalTime.innerHTML=changeTime(tTime);
+    };
+
+    var currTime=document.querySelector(".curr-time");
+    var currProgress=document.querySelector(".curr-progress");
+    video.ontimeupdate=function(){
+        var cTime=video.currentTime;
+        currTime.innerHTML=changeTime(cTime);
+        var value=cTime/tTime;
+        currProgress.style.width=value*100+"%";
+    };
+
+    function changeTime(time){
+        var h=Math.floor(time/3600);
+        var m=Math.floor(time%3600/60);
+        var s=Math.floor(time%60);
+        var h=h>=10?h:"0"+h;
+        var m=m>=10?m:"0"+m;
+        var s=s>=10?s:"0"+s;
+        var t=h+":"+m+":"+s;
+        return t;
+    }
+    document.querySelector(".extend").onclick=function(){
+      video.webkitRequestFullScreen();
+    };
+    document.querySelector(".range").onchange=function(){
+        var value=this.value();
+        video.volume=value/100;
+    };
+</script>
+</body>
+</html>
